@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شارژین - انرژی هوشمند، همیشه همراه شما</title>
+    <style>
+        /* General Styles & Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;800&display=swap');
+
+        :root {
+            --primary-color-light: #007BFF;
+            --secondary-color-light: #333;
+            --background-color-light: #f4f7f9;
+            --card-background-light: #ffffff;
+            --text-color-light: #333;
+            --subtle-text-light: #666;
+
+            --primary-color-dark: #00A9FF;
+            --secondary-color-dark: #eee;
+            --background-color-dark: #121212;
+            --card-background-dark: #1e1e1e;
+            --text-color-dark: #e0e0e0;
+            --subtle-text-dark: #999;
+        }
+
+        html, body {
+            font-family: 'Vazirmatn', sans-serif;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            background-color: var(--background-color-light);
+            color: var(--text-color-light);
+        }
+
+        body.dark-theme {
+            background-color: var(--background-color-dark);
+            color: var(--text-color-dark);
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        h1, h2, h3 {
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        h2 span {
+            color: var(--primary-color-light);
+        }
+        
+        body.dark-theme h2 span {
+            color: var(--primary-color-dark);
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto 20px auto;
+            color: var(--subtle-text-light);
+        }
+        
+        body.dark-theme p {
+            color: var(--subtle-text-dark);
+        }
+
+        /* Theme Switcher */
+        .theme-switcher {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 25px;
+            background-color: var(--secondary-color-light);
+            border-radius: 25px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        
+        body.dark-theme .theme-switcher {
+            background-color: var(--secondary-color-dark);
+        }
+
+        .theme-switcher .toggle {
+            position: absolute;
+            top: 2.5px;
+            left: 2.5px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        body.dark-theme .theme-switcher .toggle {
+            transform: translateX(25px);
+            background-color: #333;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            background: linear-gradient(90deg, var(--primary-color-light), #0056b3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.dark-theme .hero h1 {
+            background: linear-gradient(90deg, var(--primary-color-dark), #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-top: 15px;
+        }
+
+        .hero .product-image-placeholder {
+            width: 600px;
+            height: 600px;
+            border-radius: 20px;
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        body.dark-theme .hero .product-image-placeholder {
+            background: var(--card-background-dark);
+            color: var(--subtle-text-dark);
+            border-color: #444;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Story & Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: var(--card-background-light);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        body.dark-theme .feature-card {
+            background: var(--card-background-dark);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+        
+        body.dark-theme .feature-card:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color-light);
+            margin-top: 0;
+        }
+        
+        body.dark-theme .feature-card h3 {
+             color: var(--primary-color-dark);
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Infographic Section */
+        #infographic {
+            background-color: var(--card-background-light);
+        }
+
+        body.dark-theme #infographic {
+            background-color: var(--card-background-dark);
+        }
+
+        .chart-container {
+            width: 100%;
+            margin-top: 50px;
+        }
+        .chart-item {
+            margin-bottom: 30px;
+        }
+        .chart-item h4 {
+            text-align: right;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+        .bar {
+            height: 40px;
+            line-height: 40px;
+            color: white;
+            text-align: left;
+            padding-left: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: width 1s ease-in-out;
+        }
+        .sharjin-bar { background: linear-gradient(90deg, var(--primary-color-light), #0056b3); }
+        .brandx-bar { background-color: #aaa; }
+        .brandy-bar { background-color: #6c757d; }
+        
+        body.dark-theme .sharjin-bar { background: linear-gradient(90deg, var(--primary-color-dark), #00a9ff); }
+        body.dark-theme .brandx-bar { background-color: #555; }
+        body.dark-theme .brandy-bar { background-color: #444; }
+
+
+        /* Specs Section */
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+            text-align: right;
+        }
+        .spec-item {
+            background: var(--card-background-light);
+            padding: 20px;
+            border-radius: 10px;
+            border-right: 4px solid var(--primary-color-light);
+        }
+        
+        body.dark-theme .spec-item {
+            background: var(--card-background-dark);
+            border-right-color: var(--primary-color-dark);
+        }
+
+        .spec-item strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+            color: var(--text-color-light);
+        }
+
+        body.dark-theme .spec-item strong {
+            color: var(--text-color-dark);
+        }
+        
+        .spec-item span {
+            font-size: 1rem;
+            color: var(--subtle-text-light);
+        }
+
+        body.dark-theme .spec-item span {
+            color: var(--subtle-text-dark);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        footer p {
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            .hero p { font-size: 1.2rem; }
+            .container { padding: 20px 15px; }
+            section { padding: 40px 0; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="theme-switcher" id="themeSwitcher" title="تغییر تم">
+        <div class="toggle"></div>
+    </div>
+
+    <header class="hero">
+        <div class="container">
+            <h1>شارژین</h1>
+            <p>انرژی هوشمند، همیشه همراه شما.</p>
+            <div>
+                <img class="product-image-placeholder" src="img.png">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="story">
+            <div class="container">
+                <h2><span>داستان</span> یک نوآوری</h2>
+                <p>سال‌ها بود که یک خلأ در بازار لوازم جانبی موبایل حس می‌شد: پاوربانک‌ها یا گران‌قیمت و سنگین بودند، یا ارزان و بی‌کیفیت. مهندس <strong>علیرضا رشیدی</strong>، با تکیه بر دانش فنی و درک عمیق از نیاز کاربران، تصمیم گرفت این معادله را برهم بزند. حاصل ماه‌ها تحقیق و توسعه، "شارژین" است؛ محصولی که تعریف شما را از انرژی قابل حمل تغییر می‌دهد.</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>تکنولوژی شارژ آذرخش</h3>
+                        <p>شارژین به طور خودکار دستگاه شما را شناسایی کرده و بهینه‌ترین و سریع‌ترین جریان ممکن را برای آن فراهم می‌کند. نه یک وات بیشتر، نه یک وات کمتر.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>بهره‌وری بی‌نظیر</h3>
+                        <p>با بهینه‌سازی مدارهای داخلی، شارژین تا ۹۵٪ از ظرفیت اسمی خود را به دستگاه شما منتقل می‌کند. این یعنی اتلاف انرژی کمتر و شارژ بیشتر.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>طراحی و استحکام</h3>
+                        <p>بدنه‌ای از آلیاژ آلومینیوم مات و طراحی ارگونومیک، حس یک محصول لوکس و در عین حال مقاوم را به شما می‌دهد. سبک، زیبا و آماده برای هر ماجراجویی.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="infographic">
+            <div class="container">
+                <h2>چرا <span>شارژین</span> بهترین است؟</h2>
+                <p>اعداد دروغ نمی‌گویند. ما شارژین را با پاوربانک‌های رده‌بالای بازار مقایسه کردیم. نتیجه را خودتان ببینید.</p>
+                <div class="chart-container">
+                    <div class="chart-item">
+                        <h4>هزینه به ازای هر ۱۰۰۰mAh (کمتر بهتر است)</h4>
+                        <div class="bar sharjin-bar" style="width: 40%;" data-width="40">شارژین</div>
+                        <div class="bar brandx-bar" style="width: 70%;" data-width="70">برند شیائومی</div>
+                        <div class="bar brandy-bar" style="width: 90%;" data-width="90">برند سامسونگ</div>
+                    </div>
+                    <div class="chart-item">
+                        <h4>زمان شارژ کامل گوشی (کمتر بهتر است)</h4>
+                        <div class="bar sharjin-bar" style="width: 50%;" data-width="50">شارژین (۵۰ دقیقه)</div>
+                        <div class="bar brandx-bar" style="width: 75%;" data-width="75">برند شیائومی (۷۵ دقیقه)</div>
+                        <div class="bar brandy-bar" style="width: 95%;" data-width="95">برند سامسونگ (۹۵ دقیقه)</div>
+                    </div>
+                    <div class="chart-item">
+                        <h4>وزن به ازای ظرفیت (کمتر بهتر است)</h4>
+                        <div class="bar sharjin-bar" style="width: 60%;" data-width="60">شارژین</div>
+                        <div class="bar brandx-bar" style="width: 80%;" data-width="80">برند شیائومی</div>
+                        <div class="bar brandy-bar" style="width: 100%;" data-width="100">برند سامسونگ</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="specs">
+            <div class="container">
+                <h2>مشخصات <span>فنی</span></h2>
+                <div class="specs-grid">
+                    <div class="spec-item"><strong>ظرفیت</strong><span>۲۰,۰۰۰ میلی‌آمپر ساعت (واقعی)</span></div>
+                    <div class="spec-item"><strong>ورودی USB-C</strong><span>Power Delivery 3.0 (۲۰ وات)</span></div>
+                    <div class="spec-item"><strong>خروجی USB-C</strong><span>Power Delivery 3.0 (۲۲.۵ وات)</span></div>
+                    <div class="spec-item"><strong>خروجی USB-A</strong><span>۲ پورت Quick Charge 4+</span></div>
+                    <div class="spec-item"><strong>وزن</strong><span>۳۴۰ گرم</span></div>
+                    <div class="spec-item"><strong>ابعاد</strong><span>۱۳۵×۶۸×۲۵ میلی‌متر</span></div>
+                    <div class="spec-item"><strong>جنس سلول</strong><span>لیتیوم-پلیمر نسل جدید</span></div>
+                    <div class="spec-item"><strong>ایمنی</strong><span>سیستم MultiProtect پیشرفته</span></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>شارژین | طراحی و مهندسی شده توسط علیرضا رشیدی</p>
+            <p>&copy; &#1777;&#1780;&#1776;&#1780; - تمام حقوق محفوظ است.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeSwitcher = document.getElementById('themeSwitcher');
+            const body = document.body;
+
+            // Load saved theme from localStorage
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                body.classList.add(savedTheme);
+            }
+
+            themeSwitcher.addEventListener('click', () => {
+                body.classList.toggle('dark-theme');
+                // Save theme to localStorage
+                if (body.classList.contains('dark-theme')) {
+                    localStorage.setItem('theme', 'dark-theme');
+                } else {
+                    localStorage.removeItem('theme');
+                }
+            });
+
+            // Animate charts on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bars = entry.target.querySelectorAll('.bar');
+                        bars.forEach(bar => {
+                            bar.style.width = bar.getAttribute('data-width') + '%';
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            const infographicSection = document.getElementById('infographic');
+            if (infographicSection) {
+                observer.observe(infographicSection);
+            }
+        });
+    </script>
+</body>
+</html>
